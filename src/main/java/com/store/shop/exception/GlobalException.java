@@ -31,4 +31,15 @@ public class GlobalException {
         return new ResponseEntity<>(errorResponse, HttpStatus.CONFLICT);
     }
 
+    @ExceptionHandler(NotFoundException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public ResponseEntity<?> notFoundException(NotFoundException nfe, HttpServletRequest request){
+        String timestamp = Common.getTimeStamp();
+        String requestId = Common.getRequestId();
+        String endpoint = request.getRequestURI();
+
+        Error error = ApiResponse.error(timestamp,requestId,endpoint,HttpStatus.NOT_FOUND.value(), nfe.getMessage());
+        return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
+    }
+
 }

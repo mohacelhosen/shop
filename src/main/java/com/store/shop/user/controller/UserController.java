@@ -1,6 +1,7 @@
 package com.store.shop.user.controller;
 
 import com.store.shop.exception.DuplicateKeyException;
+import com.store.shop.exception.NotFoundException;
 import com.store.shop.user.model.User;
 import com.store.shop.user.service.UserService;
 import com.store.shop.util.ApiResponse;
@@ -79,7 +80,7 @@ public class UserController {
     }
 
 
-    @GetMapping("/user")
+    @GetMapping("/users")
     public ResponseEntity<?> filterUser(
             @RequestParam(required = false) String gender,
             @RequestParam(required = false) Integer age,
@@ -90,19 +91,52 @@ public class UserController {
             @RequestParam(required = false) String zipCode,
             @RequestParam(required = false) String sort,
             HttpServletRequest request
-    ){
+    ) {
         String endpoint = request.getRequestURI();
         String requestId = Common.getRequestId();
         String timeStamp = Common.getTimeStamp();
-        try{
-            List<User> filteredUsers= userService.filterAndSorting(gender,age,blood,country,state,city,zipCode,sort);
+        try {
+            List<User> filteredUsers = userService.filterAndSorting(gender, age, blood, country, state, city, zipCode, sort);
             Success<List<User>> successResponse = ApiResponse.success(timeStamp, requestId, filteredUsers, endpoint, HttpStatus.OK.value());
             return new ResponseEntity<>(successResponse, HttpStatus.OK);
-        }catch (Exception e) {
+        } catch (Exception e) {
             Error errorResponse = ApiResponse.error(timeStamp, requestId, endpoint, HttpStatus.INTERNAL_SERVER_ERROR.value(), e.getMessage());
             logger.error("Error filtering users: {}", e.getMessage());
             return new ResponseEntity<>(errorResponse, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+    @PutMapping("/user/{userId}")
+    public ResponseEntity<?> updateUserInfo(@RequestBody User user, @PathVariable Integer userId, HttpServletRequest request) {
+        String requestId = Common.getRequestId();
+        String timeStamp = Common.getTimeStamp();
+        String requestURI = request.getRequestURI();
+
+        try {
+            User updateUserInfo = userService.updateUserInfo(userId, user);
+            Success<User> successResponse = ApiResponse.success(timeStamp, requestId, updateUserInfo, requestURI, HttpStatus.OK.value());
+            return new ResponseEntity<>(successResponse, HttpStatus.OK);
+        } catch (NotFoundException notFoundException) {
+            Error error = ApiResponse.error(timeStamp, requestId, requestURI, HttpStatus.NOT_FOUND.value(), notFoundException.getMessage());
+            return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @DeleteMapping("/user/{userId}")
+    public ResponseEntity<?> deleteUserById(@PathVariable Integer userId,HttpServletRequest request){
+        String requestId = Common.getRequestId();
+        String timeStamp = Common.getTimeStamp();
+        String requestURI = request.getRequestURI();
+        try {
+            String message = userService.deleteUserById(userId);
+            Success<String> successResponse = ApiResponse.success(timeStamp, requestId, message, requestURI, HttpStatus.OK.value());
+            return new ResponseEntity<>(successResponse, HttpStatus.OK);
+        }catch (NotFoundException notFoundException) {
+            Error error = ApiResponse.error(timeStamp, requestId, requestURI, HttpStatus.NOT_FOUND.value(), notFoundException.getMessage());
+            return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
+        }
+    }
+
+
 }
 

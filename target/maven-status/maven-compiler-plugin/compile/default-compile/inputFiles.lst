@@ -8,6 +8,6 @@ D:\Spring boot project\shop\src\main\java\com\store\shop\util\Common.java
 D:\Spring boot project\shop\src\main\java\com\store\shop\ShopApplication.java
 D:\Spring boot project\shop\src\main\java\com\store\shop\exception\DuplicateKeyException.java
 D:\Spring boot project\shop\src\main\java\com\store\shop\user\controller\UserController.java
+D:\Spring boot project\shop\src\main\java\com\store\shop\exception\NotFoundException.java
 D:\Spring boot project\shop\src\main\java\com\store\shop\user\model\Address.java
-D:\Spring boot project\shop\src\main\java\com\store\shop\Test\Test.java
 D:\Spring boot project\shop\src\main\java\com\store\shop\exception\GlobalException.java

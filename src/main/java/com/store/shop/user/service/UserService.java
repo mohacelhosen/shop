@@ -1,6 +1,7 @@
 package com.store.shop.user.service;
 
 import com.store.shop.exception.DuplicateKeyException;
+import com.store.shop.exception.NotFoundException;
 import com.store.shop.user.model.User;
 import com.store.shop.user.repository.UserRepository;
 import jakarta.el.PropertyNotFoundException;
@@ -10,10 +11,10 @@ import org.springframework.beans.BeanWrapperImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.core.MongoTemplate;
-import org.springframework.stereotype.Service;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Service;
+
 import java.beans.PropertyDescriptor;
 import java.util.HashSet;
 import java.util.List;
@@ -51,7 +52,7 @@ public class UserService {
     public User updateUserInfo(Integer userId, User user) {
         Optional<User> optionalUser = userRepository.findById(userId);
         if (optionalUser.isEmpty()) {
-            throw new DuplicateKeyException("User with " + userId + " already exist");
+            throw new NotFoundException("User with " + userId + " already exist");
         }
         User dbUser = optionalUser.get();
         BeanUtils.copyProperties(user, dbUser, getNullPropertyName(user));
@@ -114,5 +115,16 @@ public class UserService {
 
         List<User> result = mongoTemplate.find(query, User.class);
         return result;
+    }
+
+    public String deleteUserById(Integer userId) {
+        Optional<User> optionalUser = userRepository.findById(userId);
+
+        if (optionalUser.isPresent()) {
+            userRepository.delete(optionalUser.get());
+            return "User Deleted Successfully";
+        } else {
+            throw new NotFoundException("User not found with ID: " + userId);
+        }
     }
 }
