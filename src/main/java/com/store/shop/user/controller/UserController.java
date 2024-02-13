@@ -48,8 +48,6 @@ public class UserController {
 
     @GetMapping("/user/{userId}")
     public ResponseEntity<?> getUserById(@PathVariable Integer userId,
-                                         @RequestHeader("Authorization") String authorization,
-                                         @RequestHeader("Accept-Language") String acceptLanguage,
                                          HttpServletRequest request) {
         String endpoint = request.getRequestURI();
         String requestId = Common.getRequestId();

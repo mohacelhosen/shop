@@ -1,0 +1,12 @@
+package com.store.shop.product.repository;
+
+import com.store.shop.product.model.Category;
+import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.stereotype.Repository;
+
+import java.util.Optional;
+
+@Repository
+public interface CategoryRepository extends MongoRepository<Category, String> {
+    Optional<Category> findByName(String categoryName);
+}
