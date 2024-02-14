@@ -48,7 +48,7 @@ public class CategoryController {
         String endpoint = request.getRequestURI();
         List<Category> categoryList = categoryService.findAllCategory();
         Success<List<Category>> successResponse = ApiResponse.success(timeStamp, requestId, categoryList, endpoint, HttpStatus.OK.value());
-        return new ResponseEntity<>(successResponse, HttpStatus.CREATED);
+        return new ResponseEntity<>(successResponse, HttpStatus.OK);
     }
 
     @GetMapping("/category")

@@ -1,20 +1,15 @@
-package com.store.shop.product.model;
+package com.store.shop.product.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.DBRef;
-import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.List;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Document(value = "PRODUCT")
-public class Product {
-    @Id
+public class ProductDto {
     private String id;
     private String title;
     private String description;
@@ -23,9 +18,7 @@ public class Product {
     private Double rating;
     private Integer stock;
     private String brand;
-
-    @DBRef
-    private Category category; // Use @DBRef annotation to reference the Category collection
+    private String categoryId;
     private List<String> subcategories;
     private String thumbnail;
     private List<String> images;
