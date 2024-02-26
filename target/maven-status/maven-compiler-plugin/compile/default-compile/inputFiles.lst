@@ -1,8 +1,10 @@
 D:\Spring boot project\shop\src\main\java\com\store\shop\user\repository\UserRepository.java
+D:\Spring boot project\shop\src\main\java\com\store\shop\ai\controller\AiController.java
 D:\Spring boot project\shop\src\main\java\com\store\shop\util\Success.java
 D:\Spring boot project\shop\src\main\java\com\store\shop\user\model\User.java
 D:\Spring boot project\shop\src\main\java\com\store\shop\util\Common.java
 D:\Spring boot project\shop\src\main\java\com\store\shop\product\repository\ProductRepository.java
+D:\Spring boot project\shop\src\main\java\com\store\shop\ai\dto\ChatGptResponse.java
 D:\Spring boot project\shop\src\main\java\com\store\shop\audio\service\AudioService.java
 D:\Spring boot project\shop\src\main\java\com\store\shop\product\model\Product.java
 D:\Spring boot project\shop\src\main\java\com\store\shop\product\repository\CategoryRepository.java
@@ -16,12 +18,16 @@ D:\Spring boot project\shop\src\main\java\com\store\shop\HomeController.java
 D:\Spring boot project\shop\src\main\java\com\store\shop\test\SearchFileByTokenSystem.java
 D:\Spring boot project\shop\src\main\java\com\store\shop\util\Error.java
 D:\Spring boot project\shop\src\main\java\com\store\shop\audio\controller\AudioController.java
+D:\Spring boot project\shop\src\main\java\com\store\shop\ai\dto\ChatGptRequest.java
 D:\Spring boot project\shop\src\main\java\com\store\shop\product\dto\ProductDto.java
 D:\Spring boot project\shop\src\main\java\com\store\shop\ShopApplication.java
 D:\Spring boot project\shop\src\main\java\com\store\shop\exception\DuplicateKeyException.java
 D:\Spring boot project\shop\src\main\java\com\store\shop\user\controller\UserController.java
+D:\Spring boot project\shop\src\main\java\com\store\shop\ai\OpenAIConfig.java
 D:\Spring boot project\shop\src\main\java\com\store\shop\product\controller\ProductController.java
+D:\Spring boot project\shop\src\main\java\com\store\shop\ai\dto\Choice.java
 D:\Spring boot project\shop\src\main\java\com\store\shop\product\service\CategoryService.java
+D:\Spring boot project\shop\src\main\java\com\store\shop\ai\dto\Message.java
 D:\Spring boot project\shop\src\main\java\com\store\shop\exception\GlobalException.java
 D:\Spring boot project\shop\src\main\java\com\store\shop\util\Convert.java
 D:\Spring boot project\shop\src\main\java\com\store\shop\product\service\ProductService.java

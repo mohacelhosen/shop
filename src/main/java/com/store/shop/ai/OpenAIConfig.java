@@ -1,24 +1,26 @@
 package com.store.shop.ai;
 
-
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpHeaders;
 import org.springframework.web.client.RestTemplate;
 
 @Configuration
 public class OpenAIConfig {
 
-    @Value("${open.api.key}")
-    String openAPiKey;
-
     @Bean
-    public RestTemplate template(){
-        RestTemplate restTemplate =  new RestTemplate();
+    public RestTemplate restTemplate() {
+        return new RestTemplate();
+    }
+
+    // This method returns a RestTemplate configured with the provided API key
+    public RestTemplate restTemplateWithApiKey(String apiKey) {
+        RestTemplate restTemplate = new RestTemplate();
         restTemplate.getInterceptors().add((request, body, execution) -> {
-            request.getHeaders().add("Authorization","Bearer "+openAPiKey);
+            HttpHeaders headers = request.getHeaders();
+            headers.add("Authorization",  apiKey);
             return execution.execute(request, body);
         });
-        return  restTemplate;
+        return restTemplate;
     }
 }
